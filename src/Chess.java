@@ -736,11 +736,11 @@ public class Chess {
                 board[m.getR1()][m.getC1()] = m.getP().getPeice();
                 board[m.getR2()][m.getC2()] = 0;
                 if (m.getC1() < m.getC2()) {
-                    board[m.getR3()][m.getC3()] = m.getDead().getPeice();
                     board[m.getR2()][m.getC2()-1] = 0;
-                } else {
                     board[m.getR3()][m.getC3()] = m.getDead().getPeice();
+                } else {
                     board[m.getR2()][m.getC2()+1] = 0;
+                    board[m.getR3()][m.getC3()] = m.getDead().getPeice();
                 }
                 return true;
             } else {
