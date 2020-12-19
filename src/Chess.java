@@ -653,42 +653,38 @@ public class Chess {
     //2: black wins
     //3: stalemate
     public int checkWinner() {
-        boolean wAlive = false;
-        boolean bAlive = false;
+        boolean wMoves = false;
+        boolean bMoves = false;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                int state = board[i][j];
-                if (state == 6) {
-                    wAlive = true;
-                } else if (state == 12) {
-                    bAlive = true;
-                }
-            }
-        }
-        if (!wAlive) {
-            gameOver = true;
-            return 2;
-        } else if (!bAlive) {
-            gameOver = true;
-            return 1;
-        } 
-        //check stalemate or game in progress
-        else {
-            boolean stale = true;
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    List<Move> moves = getMoves(j, i);
-                    if (!moves.isEmpty()) {
-                        stale = false;
+                PieceType p = PieceType.valueOf(board[i][j]);
+                System.out.println(removeCheckMoves(getMoves(j, i)).isEmpty());
+                if (p != PieceType.EMPTY && !removeCheckMoves(getMoves(j, i)).isEmpty()) {
+                    //System.out.println(getMoves(j, i));
+                    if (Pieces.isWhite(p)) {
+                        System.out.println(p);
+                        wMoves = true;
+                    } else {
+                        bMoves = true;
                     }
                 }
             }
-            if (stale) {
-                gameOver = true;
-                return 3;
+        }
+        System.out.println(wMoves);
+        if (!wMoves && white) {
+            if (check() == 2) {
+                return 2;
             } else {
-                return 0;
+                return 3;
             }
+        } else if (!bMoves && !white) {
+            if (check() == 1) {
+                return 1;
+            } else {
+                return 3;
+            }
+        } else {
+            return 0;
         }
     }
     

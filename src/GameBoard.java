@@ -142,6 +142,7 @@ public class GameBoard extends JPanel {
         }
         
         int winner = c.checkWinner();
+        System.out.println(winner);
         if (winner == 1) {
             status.setText("White wins!!!");
         } else if (winner == 2) {

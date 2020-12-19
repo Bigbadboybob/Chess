@@ -32,5 +32,20 @@ public class Pieces{
         g.drawImage(img, px, py, width, height, null);
     }
     
+    static public boolean isWhite(PieceType p) {
+        int i = p.getPeice();
+        if (i >= 1 && i <= 6) {
+            return true;
+        } else if (i >= 7 && i <= 12) {
+            return false;
+        } else {
+            if (i==0) {
+                System.out.println("Empty");
+            }
+            throw new IllegalArgumentException();
+        }
+        
+    }
+    
 
 }
